@@ -1,8 +1,3 @@
-## Example
-***
-
-[Example](Example.unity)
-
 ## Using
 ***
 
