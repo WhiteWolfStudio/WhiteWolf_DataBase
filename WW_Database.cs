@@ -91,6 +91,10 @@ namespace WhiteWolf {
 
         public string GetFilePath( string file ){ return $"{Application.persistentDataPath}/{file}"; }
 
+        public string FilePath(){ return Application.persistentDataPath; }
+
+        public void File_Path() => Debug.Log( Application.persistentDataPath );
+
     }
 
 }
