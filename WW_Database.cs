@@ -94,6 +94,15 @@ namespace WhiteWolf {
         public string FilePath(){ return Application.persistentDataPath; }
 
         public void File_Path() => Debug.Log( Application.persistentDataPath );
+        
+        public bool CheckFile( string file ){
+
+            string path = $"{Application.persistentDataPath}/{file}";
+
+            if ( File.Exists( path ) ){ return true; }
+            return false;
+
+        }
 
     }
 
