@@ -84,8 +84,9 @@ namespace WhiteWolf {
 
             string path = $"{Application.persistentDataPath}/{fileName}";
 
-            StreamWriter sw = File.AppendText( path );
-            sw.WriteLine( $"{data}" );
+            StreamWriter sw = File.CreateText( path );
+            sw.Write( $"{data}" );
+            sw.Close();
 
         }
 
@@ -93,8 +94,8 @@ namespace WhiteWolf {
 
         public string FilePath(){ return Application.persistentDataPath; }
 
-        public void File_Path() => Debug.Log( Application.persistentDataPath );
-        
+        public void printFilePath() => Debug.Log( Application.persistentDataPath );
+
         public bool CheckFile( string file ){
 
             string path = $"{Application.persistentDataPath}/{file}";
