@@ -19,6 +19,8 @@ namespace WhiteWolf {
 
     public class WW_ShowDB : WW_Database {
 
+        public string filePath;
+
         [TextArea]
         public string text;
 
@@ -27,6 +29,8 @@ namespace WhiteWolf {
         public DBDatas[] datas;
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+
+        private void Awake() => filePath = Application.persistentDataPath;
 
         void Update() {
 
