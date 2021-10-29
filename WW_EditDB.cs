@@ -10,7 +10,7 @@ namespace WhiteWolf {
 
         [HorizontalLine]
 
-        [Dropdown("types")]
+        [Dropdown("StringValues")]
         public string type;
 
         [HorizontalLine]
@@ -20,7 +20,7 @@ namespace WhiteWolf {
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        private List<string> types { get { return new List<string>() { "int", "float", "string" }; } }
+        private List<string> StringValues { get { return new List<string>() { "int", "float", "string" }; } }
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
@@ -32,6 +32,9 @@ namespace WhiteWolf {
             if ( type == "string" ){ SaveDataString( _name, data ); print( $"{_name}: {LoadDataString( _name )}" ); }
 
         }
+
+        [Button]
+        void Reset() => ResetData();
 
     }
 
