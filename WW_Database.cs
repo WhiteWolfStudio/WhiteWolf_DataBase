@@ -23,6 +23,19 @@ namespace WhiteWolf {
             return null;
         }
 
+        // Load BOOL
+        public static bool LoadDataBool( string name ){
+
+            if ( PlayerPrefs.HasKey( name ) ){
+
+                return ( PlayerPrefs.GetInt( name )  == 0 ? false : true );
+
+            }
+
+            return false;
+
+        }
+
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         // Save FLOAT
@@ -41,6 +54,14 @@ namespace WhiteWolf {
         public static void SaveDataString(string name, string value) {
             PlayerPrefs.SetString(name, value);
             PlayerPrefs.Save();
+        }
+
+        // Save BOOL
+        public static void SaveDataBool( string name, bool value ){
+
+            if ( value == false ){ PlayerPrefs.SetInt( name, 0 ); }
+            else { PlayerPrefs.SetInt( name, 1 ); }
+
         }
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
