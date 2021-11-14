@@ -20,7 +20,7 @@ namespace WhiteWolf {
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        private List<string> StringValues { get { return new List<string>() { "int", "float", "string" }; } }
+        private List<string> StringValues { get { return new List<string>() { "int", "float", "string", "bool" }; } }
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
@@ -30,6 +30,7 @@ namespace WhiteWolf {
             if ( type == "int" ){ SaveDataInt( _name, int.Parse( data ) ); print( $"{_name}: {LoadDataInt( _name )}" ); }
             if ( type == "float" ){ SaveDataFloat( _name, float.Parse( data ) ); print( $"{_name}: {LoadDataFloat( _name )}" ); }
             if ( type == "string" ){ SaveDataString( _name, data ); print( $"{_name}: {LoadDataString( _name )}" ); }
+            if ( type == "bool" ){ SaveDataBool( _name, bool.Parse( data ) ); print( $"{_name}: {LoadDataBool( _name )}" ); }
 
         }
 
