@@ -6,54 +6,69 @@ namespace WhiteWolf {
     public class WW_Database : MonoBehaviour {
 
         // Load FLOAT
-        public static float LoadDataFloat(string name) {
-            if (PlayerPrefs.HasKey(name)) return PlayerPrefs.GetFloat(name);
-            return -0.0f;
+        public static float LoadDataFloat( string name, float or ){
+
+            if ( PlayerPrefs.HasKey( name ) ) return PlayerPrefs.GetFloat( name );
+            else SaveDataFloat( name, or );
+
+            return LoadDataFloat( name, or ); ;
+
         }
 
         // Load INT
-        public static int LoadDataInt(string name) {
-            if (PlayerPrefs.HasKey(name)) return PlayerPrefs.GetInt(name);
-            return -0;
+        public static int LoadDataInt( string name, int or ){
+
+            if ( PlayerPrefs.HasKey( name ) ) return PlayerPrefs.GetInt( name );
+            else SaveDataInt( name, or );
+
+            return LoadDataInt( name, or );
+
         }
 
         // Load STRING
-        public static string LoadDataString(string name) {
-            if (PlayerPrefs.HasKey(name)) return PlayerPrefs.GetString(name);
-            return null;
+        public static string LoadDataString( string name, string or ){
+
+            if ( PlayerPrefs.HasKey( name ) ) return PlayerPrefs.GetString( name );
+            else SaveDataString( name, or );
+
+            return LoadDataString( name, or );
+
         }
 
         // Load BOOL
-        public static bool LoadDataBool( string name ){
+        public static bool LoadDataBool( string name, bool or ){
 
-            if ( PlayerPrefs.HasKey( name ) ){
+            if ( PlayerPrefs.HasKey( name ) ){ return ( PlayerPrefs.GetInt( name )  == 0 ? false : true ); }
+            else SaveDataBool( name, or );
 
-                return ( PlayerPrefs.GetInt( name )  == 0 ? false : true );
-
-            }
-
-            return false;
+            return LoadDataBool( name, or );
 
         }
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         // Save FLOAT
-        public static void SaveDataFloat(string name, float value) {
-            PlayerPrefs.SetFloat(name, value);
+        public static void SaveDataFloat( string name, float value ){
+
+            PlayerPrefs.SetFloat( name, value );
             PlayerPrefs.Save();
+
         }
 
         // Save INT
-        public static void SaveDataInt(string name, int value) {
-            PlayerPrefs.SetInt(name, value);
+        public static void SaveDataInt( string name, int value ){
+
+            PlayerPrefs.SetInt( name, value );
             PlayerPrefs.Save();
+
         }
 
         // Save STRING
-        public static void SaveDataString(string name, string value) {
-            PlayerPrefs.SetString(name, value);
+        public static void SaveDataString( string name, string value ){
+
+            PlayerPrefs.SetString( name, value );
             PlayerPrefs.Save();
+
         }
 
         // Save BOOL
@@ -66,38 +81,18 @@ namespace WhiteWolf {
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        // Check FLOAT
-        public static bool CheakFloat(string name) {
-            if (LoadDataFloat(name) == -0f) return false;
-            else return true;
-        }
-
-        // Check INT
-        public static bool CheakInt(string name) {
-            if (LoadDataInt(name) == -0f) return false;
-            else return true;
-        }
-
-        // Check STRING
-        public static bool CheakString(string name) {
-            if (LoadDataString(name) == null) return false;
-            else return true;
-        }
+        public static void PlusFloat( string name, float n ) => SaveDataFloat( name, LoadDataFloat( name, 0 ) + n );
+        public static void PlusInt( string name, int n ) => SaveDataInt( name, LoadDataInt( name, 0 ) + n );
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        public static void PlusFloat(string name, float n) => SaveDataFloat(name, LoadDataFloat(name) + n);
-        public static void PlusInt(string name, int n) => SaveDataInt(name, LoadDataInt(name) + n);
-
-        /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
-
-        public static void MinusFloat(string name, float n) => SaveDataFloat(name, LoadDataFloat(name) - n);
-        public static void MinusInt(string name, int n) => SaveDataInt(name, LoadDataInt(name) - n);
+        public static void MinusFloat( string name, float n ) => SaveDataFloat( name, LoadDataFloat( name, 0 ) - n);
+        public static void MinusInt( string name, int n ) => SaveDataInt( name, LoadDataInt( name, 0 ) - n );
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         // Reset INT / FLOAT / STRING
-        public static void ResetData() { PlayerPrefs.DeleteAll(); Debug.Log("All data deleted!"); }
+        public static void ResetData(){ PlayerPrefs.DeleteAll(); print( "All data deleted!" ); }
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
