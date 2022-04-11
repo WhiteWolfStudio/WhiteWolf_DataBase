@@ -20,21 +20,31 @@ namespace WhiteWolf {
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        private List<string> StringValues { get { return new List<string>() { "int", "float", "string" }; } }
+        private List<string> StringValues => new List<string>() { "int", "float", "string" };
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         [Button]
-        void Edit(){
+        private void Edit(){
 
-            if ( type == "int" ){ SaveDataInt( _name, int.Parse( data ) ); print( $"{_name}: {LoadDataInt( _name, 0 )}" ); }
-            if ( type == "float" ){ SaveDataFloat( _name, float.Parse( data ) ); print( $"{_name}: {LoadDataFloat( _name, 0 )}" ); }
-            if ( type == "string" ){ SaveDataString( _name, data ); print( $"{_name}: {LoadDataString( _name, "null" )}" ); }
-
+            switch ( type ){
+                
+                case "int":
+                    SaveDataInt( _name, int.Parse( data ) ); print( $"{_name}: {LoadDataInt( _name, 0 )}" );
+                    break;
+                case "float":
+                    SaveDataFloat( _name, float.Parse( data ) ); print( $"{_name}: {LoadDataFloat( _name, 0 )}" );
+                    break;
+                case "string":
+                    SaveDataString( _name, data ); print( $"{_name}: {LoadDataString( _name, "null" )}" );
+                    break;
+                
+            }
+            
         }
 
         [Button]
-        void Reset() => ResetData();
+        private void Reset() => ResetData();
 
     }
 
