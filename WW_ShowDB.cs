@@ -2,8 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace WhiteWolf {
+using NaughtyAttributes;
 
+namespace WhiteWolf {
+    
     [System.Serializable]
     public class DBDatas {
 
@@ -16,10 +18,12 @@ namespace WhiteWolf {
         public bool _string;
 
     }
-
+    
     public class WW_ShowDB : WW_Database {
 
-        [TextArea]
+        public string filePath;
+
+        [ResizableTextArea]
         public string text;
 
         [Space]
@@ -28,18 +32,17 @@ namespace WhiteWolf {
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
-        void Update() {
+        private void Awake() => filePath = Application.persistentDataPath;
 
+        private void Update(){
+            
             text = "";
 
-            for ( int i = 0; i<datas.Length; i++ ){
-
-                if ( datas[ i ]._int ) text += $"{ datas[i].data }: { LoadDataInt( datas[i].data, 0 ).ToString()}\n";
-                else if ( datas[ i ]._float ) text += $"{ datas[i].data }: { LoadDataFloat( datas[i].data, 0 ).ToString() }\n";
-                else if ( datas[ i ]._string ) text += $"{ datas[i].data }: { LoadDataString( datas[i].data, "null" )}\n";
-
+            foreach ( var t in datas ){
+                if ( t._int ) text += $"{ t.data }: { LoadDataInt( t.data ).ToString()}\n";
+                else if ( t._float ) text += $"{ t.data }: { LoadDataFloat(t.data ).ToString() }\n";
+                else if ( t._string ) text += $"{ t.data }: { LoadDataString(t.data )}\n";
             }
-
         }
 
     }
