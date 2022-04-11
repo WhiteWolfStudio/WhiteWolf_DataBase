@@ -6,7 +6,7 @@ namespace WhiteWolf {
     public class WW_Database : MonoBehaviour {
 
         // Load FLOAT
-        public static float LoadDataFloat( string name, float or ){
+        public static float LoadDataFloat( string name, float or = 0 ){
 
             if ( PlayerPrefs.HasKey( name ) ) return PlayerPrefs.GetFloat( name );
             else SaveDataFloat( name, or );
@@ -16,7 +16,7 @@ namespace WhiteWolf {
         }
 
         // Load INT
-        public static int LoadDataInt( string name, int or ){
+        public static int LoadDataInt( string name, int or = 0 ){
 
             if ( PlayerPrefs.HasKey( name ) ) return PlayerPrefs.GetInt( name );
             else SaveDataInt( name, or );
@@ -26,22 +26,12 @@ namespace WhiteWolf {
         }
 
         // Load STRING
-        public static string LoadDataString( string name, string or ){
+        public static string LoadDataString( string name, string or = null ){
 
             if ( PlayerPrefs.HasKey( name ) ) return PlayerPrefs.GetString( name );
             else SaveDataString( name, or );
 
             return LoadDataString( name, or );
-
-        }
-
-        // Load BOOL
-        public static bool LoadDataBool( string name, bool or ){
-
-            if ( PlayerPrefs.HasKey( name ) ){ return ( PlayerPrefs.GetInt( name )  == 0 ? false : true ); }
-            else SaveDataBool( name, or );
-
-            return LoadDataBool( name, or );
 
         }
 
@@ -71,14 +61,6 @@ namespace WhiteWolf {
 
         }
 
-        // Save BOOL
-        public static void SaveDataBool( string name, bool value ){
-
-            if ( value == false ){ PlayerPrefs.SetInt( name, 0 ); }
-            else { PlayerPrefs.SetInt( name, 1 ); }
-
-        }
-
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         public static void PlusFloat( string name, float n ) => SaveDataFloat( name, LoadDataFloat( name, 0 ) + n );
@@ -98,9 +80,9 @@ namespace WhiteWolf {
 
         public static void SaveFile( string fileName, string data ){
 
-            string path = $"{Application.persistentDataPath}/{fileName}";
+            var path = $"{Application.persistentDataPath}/{fileName}";
 
-            StreamWriter sw = File.CreateText( path );
+            var sw = File.CreateText( path );
             sw.Write( $"{data}" );
             sw.Close();
 
@@ -114,11 +96,9 @@ namespace WhiteWolf {
 
         public static bool CheckFile( string file ){
 
-            string path = $"{Application.persistentDataPath}/{file}";
+            var path = $"{Application.persistentDataPath}/{file}";
 
-            if ( File.Exists( path ) ){ return true; }
-            return false;
-
+            return File.Exists( path );
         }
 
     }
