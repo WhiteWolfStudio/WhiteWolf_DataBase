@@ -1,48 +1,75 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
 using NaughtyAttributes;
 
 namespace WhiteWolf {
     
     [System.Serializable]
-    public class DBDatas {
+    public class DBData {
 
-        public string data;
+        public string name;
+        [Dropdown("StringValues")] public string type;
 
-        [Space]
-
-        public bool _int;
-        public bool _float;
-        public bool _string;
+        private List<string> StringValues => new List<string>() { "int", "float", "string", "vector2", "vector3" };
 
     }
     
     public class WW_ShowDB : WW_Database {
+        
+        [HorizontalLine]
 
         public string filePath;
 
+        [HorizontalLine]
+        
         [ResizableTextArea]
         public string text;
 
         [Space]
 
-        public DBDatas[] datas;
+        public DBData[] data;
 
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         private void Awake() => filePath = Application.persistentDataPath;
 
-        private void Update(){
+        private void Update() => ShowData();
+        
+        /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+        
+        private void ShowData(){
             
             text = "";
 
-            foreach ( var t in datas ){
-                if ( t._int ) text += $"{ t.data }: { LoadDataInt( t.data ).ToString()}\n";
-                else if ( t._float ) text += $"{ t.data }: { LoadDataFloat(t.data ).ToString() }\n";
-                else if ( t._string ) text += $"{ t.data }: { LoadDataString(t.data )}\n";
+            foreach ( var t in data ){
+
+                switch ( t.type ){
+                    
+                    case "int":
+                        text += $"{ t.name }: { LoadDataInt( t.name ).ToString()}\n";
+                        break;
+                    
+                    case "float":
+                        text += $"{ t.name }: { LoadDataFloat(t.name ).ToString() }\n";
+                        break;
+                    
+                    case "string":
+                        text += $"{ t.name }: { LoadDataString(t.name )}\n";
+                        break;
+                    
+                    case "vector2":
+                        text += $"{ t.name }: { LoadDataVector2(t.name )}\n";
+                        break;
+                    
+                    case "vector3":
+                        text += $"{ t.name }: { LoadDataVector3(t.name )}\n";
+                        break;
+
+                }
+
             }
+            
         }
 
     }
