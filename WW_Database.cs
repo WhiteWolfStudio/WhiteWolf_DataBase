@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.IO;
+using System.Numerics;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace WhiteWolf {
 
@@ -35,6 +38,31 @@ namespace WhiteWolf {
 
         }
 
+        public static Vector2 LoadDataVector2( string name, Vector2 or = default ){
+
+            if ( PlayerPrefs.HasKey( name ) )
+                return new Vector2( 
+                    PlayerPrefs.GetFloat( $"{name}_x" ), 
+                    PlayerPrefs.GetFloat( $"{name}_y" ) );
+            else SaveDataVector2( name, Vector2.zero );
+
+            return LoadDataVector2( name, Vector2.zero );
+
+        }
+        
+        public static Vector3 LoadDataVector3( string name, Vector3 or = default ){
+
+            if ( PlayerPrefs.HasKey( name ) )
+                return new Vector3( 
+                    PlayerPrefs.GetFloat( $"{name}_x" ), 
+                    PlayerPrefs.GetFloat( $"{name}_y" ), 
+                    PlayerPrefs.GetFloat( $"{name}_z" ) );
+            else SaveDataVector3( name, Vector3.zero );
+
+            return LoadDataVector3( name, Vector3.zero );
+
+        }
+
         /*––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
         // Save FLOAT
@@ -57,6 +85,32 @@ namespace WhiteWolf {
         public static void SaveDataString( string name, string value ){
 
             PlayerPrefs.SetString( name, value );
+            PlayerPrefs.Save();
+
+        }
+        
+        // Save VECTOR2
+        public static void SaveDataVector2( string name, Vector2 value ){
+
+            // X
+            PlayerPrefs.SetFloat( $"{name}_x", value.x );
+            // Y
+            PlayerPrefs.SetFloat( $"{name}_x", value.y );
+            
+            PlayerPrefs.Save();
+
+        }
+        
+        // Save VECTOR3
+        public static void SaveDataVector3( string name, Vector3 value ){
+
+            // X
+            PlayerPrefs.SetFloat( $"{name}_x", value.x );
+            // Y
+            PlayerPrefs.SetFloat( $"{name}_y", value.y );
+            // Z
+            PlayerPrefs.SetFloat( $"{name}_z", value.z );
+            
             PlayerPrefs.Save();
 
         }
